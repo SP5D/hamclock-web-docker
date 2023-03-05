@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+
+  hamclock:
+    image: sylogista/hamclock-web:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+      - 8081:8081
+    volumes:
+      - ./etc:/root/.hamclock  # your settings
+
+
+    # If you want to change the resolution, just comment my choice and uncomment yours.
+    # Indeed, all resolutions are in 5:3 aspect ratio. We've to just deal with it.
+    # If you need to limit CPU usage, it may be good idea to use 800x480 instead of 3200x1920 ;)
+    # Anyway, difference is not huge. IMHO normally it's best idea to choose more than you can handle.
+    # Web browser will up/downscale it without problem, so 2400x1440 for screen 1920x1080 etc. is IMHO the way to go.
+    #
+    #command: "hamclock-800x480"
+    #command: "hamclock-1600x960"
+    command: "hamclock-2400x1440"
+    #command: "hamclock-3200x1920"
